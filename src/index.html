@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>The Wolf</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .company,
+    .search,
+    .contribution {
+      display: flex;
+    }
+
+    .company > div {
+      flex: 1;
+    }
+
+    input,
+    button {
+      height: 30px;
+      padding: 0 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="search">
@@ -15,8 +37,23 @@
     <button class="search__button">search</button>
   </div>
 
+  <div class="contribution">
+    <input type="text" class="contribution__input">
+    <button class="contribution__button">APORTAR</button>
+    <div class="contribution__value">R$ 0</div>
+  </div>
+
   <hr />
 
+  <div class="company">
+    <div>AÇÃO</div>
+    <div>PREÇO ATUAL</div>
+    <div>PARTICIPAÇÃO RECOMENDADA</div>
+    <div>PARTICIPAÇÃO / APORTE</div>
+    <div>APORTE</div>
+    <div>QUANTIDADE</div>
+  </div>
+  <hr>
   <div class="list"></div>
 </body>
 </html>
