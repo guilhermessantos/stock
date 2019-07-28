@@ -1,43 +1,38 @@
+import { mock, mockCompany } from './__mock__'
 import axios from 'axios'
 import { search } from './search'
 
 jest.mock('axios')
 
 describe('Search', () => {
-  const symbol = 'ITSA4'
-
-  it('should return data API', () => {
-    const company = {
-      "Global Quote": {
-        "01. symbol": symbol,
-        "02. open": "13.2400",
-        "03. high": "13.2700",
-        "04. low": "13.0000",
-        "05. price": "13.0000",
-        "06. volume": "31247200",
-        "07. latest trading day": "2019-07-12",
-        "08. previous close": "13.2000",
-        "09. change": "-0.2000",
-        "10. change percent": "-1.5152%"
-      }
-    }
-
-    const resp = { data: company }
+  it('Should return company `CNTO3`', () => {
+    const resp = { data: mock }
     axios.get.mockResolvedValue(resp)
 
-    return search.query(symbol).then(data => expect(data).toEqual(company))
+    return search.query('CNTO3').then(data => expect(data).toEqual(mockCompany))
   })
 
-  it('Should display search result element', () => {
-    const el = `<li class="search__item">${symbol}</li>`
-
-    expect(search.renderResult(symbol)).toEqual(el)
+  it('Should return object company', () => {
+    expect(search.getCompany(mock)).toEqual(mockCompany)
   })
 
-  it('should return value input search', () => {
-    const input = document.createElement('input')
-    input.value = symbol
+  it('Should return input value', () => {
+    const element = document.createElement('input')
+    element.value = 'CNTO3'
 
-    expect(search.getValueInput(input)).toEqual(symbol)
+    expect(search.getInputValue(element)).toEqual('CNTO3')
+  })
+
+  it('Should return company item render', () => {
+    const symbol = 'CNTO3'
+    const element = document.createElement('div')
+    const item = `
+      <div class="search__item">
+        <span class="search__symbol">${symbol}</span>
+        <input class="search__percent" type="text" />
+      </div>
+    `
+
+    expect(search.render(symbol, element)).toEqual(item)
   })
 })

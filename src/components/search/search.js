@@ -1,8 +1,11 @@
 import axios from 'axios'
 import { config } from '../utils/config'
-import { $q } from '../utils/utils'
+import { data } from '../data/data'
+import { company } from '../company/company'
+import { list } from '../list/list'
 
 const search = {
+  init: () => search.eventListener(),
   query: symbol => {
     return axios.get(config.api, {
       params: {
@@ -10,17 +13,51 @@ const search = {
         apikey: config.apiKey
       }
     })
-    .then(resp => resp.data).catch(() => {console.log('Error company search')})
+    .then(resp => search.getCompany(resp.data))
+    .catch(error => error)
   },
-  renderResult: symbol => `<li class="search__item">${symbol}</li>`,
-  getValueInput: (element = $q('search__input')) => element.value,
-  eventListener: () => document.querySelector('.search__button').addEventListener('click', search.render.bind(this)),
-  render: async () => {
-    const valueInput = search.getValueInput()
-    const query = await search.query(valueInput)
+  getCompany: data => {
+    const company = data['Global Quote']
 
-    $q('search__list').innerHTML = search.renderResult(query['Global Quote']['01. symbol'])
-  }
+    return {
+      symbol: company['01. symbol'],
+      currentPrice: parseFloat(company['05. price'])
+    }
+  },
+  getInputValue: element => element.value,
+  eventListener: () => document.querySelector('.search__button').addEventListener('click', async () => {
+    const input = document.querySelector('.search__input')
+    const inputValue = search.getInputValue(input)
+    const company = await search.query(inputValue)
+    input.value = ''
+
+    search.render(company.symbol)
+    search.save('.search-item__symbol', '.search-item__percent', company.currentPrice)
+  }),
+  save: (symbol, percent, currentPrice) => {
+    document.querySelector('.search-item__button').addEventListener('click', () => {
+      const symbolValue = document.querySelector(symbol).textContent
+      const percentValue = document.querySelector(percent).value
+      const getDataCompany = data.get()
+      const newCompany = {
+        symbol: symbolValue,
+        currentPrice: currentPrice,
+        currentPercent: parseFloat(percentValue)
+      }
+
+      company.save(getDataCompany, newCompany)
+      list.init()
+    })
+  },
+  render: (symbol, element = document.querySelector('.search__list')) => (
+    element.innerHTML = `
+      <div class="search-item">
+        <span class="search-item__symbol">${symbol}</span>
+        <input class="search-item__percent" type="text" />
+        <button class="search-item__button">salvar</button>
+      </div>
+    `
+  )
 }
 
 export { search }
