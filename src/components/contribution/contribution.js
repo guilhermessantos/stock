@@ -1,41 +1,28 @@
-const contribution = {
-  save: (data, value) => {
-    const isNumber = typeof value == 'number'
-    isNumber ? data.contribution = value : data
-
-    return data
-  }
-}
-
-export { contribution }
-
-
-
-
-
-/* import { $q } from '../utils/utils'
-import { list } from '../list/list'
+import { data } from '../data/data'
 
 const contribution = {
   init: () => {
-    contribution.hasValue()
+    const getValue = contribution.get(data.get())
     contribution.eventListener()
-  },
-  getValueData: () => list.getLocal().contribution,
-  hasValue: () => contribution.getValueData() ? contribution.save(contribution.getValueData()) : contribution.save(0),
-  getValue: (element = $q('contribution__input')) => element.value,
-  eventListener: () => $q('contribution__button').addEventListener('click', () => contribution.render()),
-  save: (value, element = $q('contribution__value')) => {
-    const data = list.getLocal()
 
-    data.contribution = value
-    list.setLocal(data)
-    element.innerHTML = `R$ ${value}`
-    list.init()
+    return contribution.render(getValue)
   },
-  render: () => {
-    contribution.save(contribution.getValue())
-  }
+  save: (db, value) => {
+    value ? db.contribution = parseInt(value) : db
+
+    return data.save(db)
+  },
+  get: db => db ? db.contribution : 0,
+  eventListener: () => {
+    const input = document.querySelector('.contribution__input')
+
+    document.querySelector('.contribution__button').addEventListener('click', () => {
+      contribution.render(input.value)
+      contribution.save(data.get(), input.value)
+      input.value = ''
+    })
+  },
+  render: value => document.querySelector('.contribution__value').innerHTML = `R$ ${value}`
 }
 
-export { contribution } */
+export { contribution }

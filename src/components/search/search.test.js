@@ -30,6 +30,7 @@ describe('Search', () => {
       <div class="search__item">
         <span class="search__symbol">${symbol}</span>
         <input class="search__percent" type="text" />
+        <button class="search-item__button">salvar</button>
       </div>
     `
 
