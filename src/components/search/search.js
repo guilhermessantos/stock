@@ -42,7 +42,7 @@ const search = {
       const newCompany = {
         symbol: symbolValue,
         currentPrice: currentPrice,
-        currentPercent: parseFloat(percentValue)
+        currentPercent: parseFloat(percentValue ? percentValue : 0)
       }
 
       company.save(getDataCompany, newCompany)
