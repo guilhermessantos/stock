@@ -9,6 +9,7 @@ const company = {
   },
   remove: (db, dataCompany) => {
     db.companies = db.companies.filter(el => el.symbol !== dataCompany)
+    data.save(db)
 
     return db
   }
