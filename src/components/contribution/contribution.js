@@ -1,4 +1,5 @@
 import { data } from '../data/data'
+import { list } from '../list/list'
 
 const contribution = {
   init: () => {
@@ -20,6 +21,7 @@ const contribution = {
       contribution.render(input.value)
       contribution.save(data.get(), input.value)
       input.value = ''
+      list.init()
     })
   },
   render: value => document.querySelector('.contribution__value').innerHTML = `R$ ${value}`
