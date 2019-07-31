@@ -53,8 +53,8 @@ const search = {
     element.innerHTML = `
       <div class="search-item">
         <span class="search-item__symbol">${symbol}</span>
-        <input class="search-item__percent" type="text" />
-        <button class="search-item__button">salvar</button>
+        <input class="search-item__percent" type="text" placeholder="ex: 10" />
+        <button class="search-item__button">participação recomendada</button>
       </div>
     `
   )

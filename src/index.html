@@ -13,8 +13,14 @@
 
     .company,
     .search,
-    .contribution {
+    .contribution,
+    .search-item {
       display: flex;
+    }
+
+    .search-item__symbol,
+    .contribution__button {
+      margin-right: 20px;
     }
 
     .company > div {
@@ -26,19 +32,40 @@
       height: 30px;
       padding: 0 20px;
     }
+
+    .search__field {
+      width: 550px;
+    }
+
+    .search__field input {
+      width: 100%;
+    }
+
+    .search__list {
+      padding-left: 0;
+    }
+
+    .search-item__button {
+      width: 500px;
+      text-transform: uppercase;
+    }
+
+    .search-item {
+      align-items: center;
+    }
   </style>
 </head>
 <body>
   <div class="search">
     <div class="search__field">
-      <input type="text" class="search__input">
+      <input type="text" class="search__input" placeholder="ex: itsa4">
       <ul class="search__list"></ul>
     </div>
-    <button class="search__button">search</button>
+    <button class="search__button">BUSCAR EMPRESA</button>
   </div>
 
   <div class="contribution">
-    <input type="text" class="contribution__input">
+    <input type="text" class="contribution__input" placeholder="ex: 1000">
     <button class="contribution__button">APORTAR</button>
     <div class="contribution__value"></div>
   </div>
@@ -47,11 +74,12 @@
 
   <div class="company">
     <div>AÇÃO</div>
-    <div>PREÇO ATUAL</div>
-    <div>PARTICIPAÇÃO RECOMENDADA</div>
-    <div>PARTICIPAÇÃO / APORTE</div>
-    <div>APORTE</div>
+    <div>[R$] PREÇO ATUAL</div>
+    <div>[%] PARTICIPAÇÃO RECOMENDADA</div>
+    <div>[%] PARTICIPAÇÃO / APORTE</div>
+    <div>[R$] APORTE</div>
     <div>QUANTIDADE</div>
+    <div></div>
   </div>
   <hr>
   <div class="list"></div>

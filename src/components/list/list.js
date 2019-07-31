@@ -48,7 +48,9 @@ const list = {
           <div class="company__percent">${parseInt(percent)}%</div>
           <div class="company__contribution">R$ ${parseInt(contribution)}</div>
           <div class="company__amount">${amount.length}</div>
-          <button class="company__remove" data-company-name="${company.symbol}">X</button>
+          <div>
+            <button class="company__remove" data-company-name="${company.symbol}">X</button>
+          </div>
         </div><hr/>
       `
     }).join('')
