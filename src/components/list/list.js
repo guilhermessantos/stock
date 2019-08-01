@@ -29,10 +29,10 @@ const list = {
   render: (db, element = document.querySelector('.list')) => {
     const sumPercent = list.sumPercent(db)
     const contributionDb = data.get().contribution
-    const amount = []
 
     const companies = db.companies.map(company => {
       let currentPrice = company.currentPrice
+      const amount = []
       const percent = company.currentPercent / sumPercent * 100
       const contribution = percent * contributionDb / 100
 
