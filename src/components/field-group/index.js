@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { Container } from '../field/styles'
+import { Container as Field } from '../field/styles'
 import { Button } from '../button'
 
 export const FieldGroup = styled.div`
   align-items: flex-end;
   display: flex;
 
-  ${Container} {
+  ${Field} {
     width: 100%;
 
     input {
