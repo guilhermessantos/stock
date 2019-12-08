@@ -1,73 +1,86 @@
-import React from 'react'
-import { FaTrashAlt, FaRedo } from 'react-icons/fa'
-import { Table, Participation, ButtonAction } from './styles'
+import React, { useEffect } from 'react'
+import { FaTrashAlt, FaDollarSign } from 'react-icons/fa'
+import { Table, Participation, ButtonAction, Message } from './styles'
 
-const TableParticipation = () => (
-  <Table>
-    <thead>
-      <tr>
-        <th width="100">Ação</th>
-        <th>Preço atual</th>
-        <th>Participação</th>
-        <th>Aporte</th>
-        <th>Quant.</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>MALL11</td>
-        <td>R$ 13,00</td>
-        <Participation>
-          <span>10%</span><span>12%</span>
-        </Participation>
-        <td>R$ 2000,00</td>
-        <td>51</td>
-        <td>
-          <ButtonAction>
-            <div>
-              <span><FaTrashAlt /></span>
-              <span><FaRedo /></span>
-            </div>
-          </ButtonAction>
-        </td>
-      </tr>
-      <tr>
-        <td>CNTO3</td>
-        <td>R$ 13,00</td>
-        <Participation>
-          <span>10%</span><span>12%</span>
-        </Participation>
-        <td>R$ 2000,00</td>
-        <td>51</td>
-        <td>
-          <ButtonAction>
-            <div>
-              <span><FaTrashAlt /></span>
-              <span><FaRedo /></span>
-            </div>
-          </ButtonAction>
-        </td>
-      </tr>
-      <tr>
-        <td>ITSA4</td>
-        <td>R$ 13,00</td>
-        <Participation>
-          <span>7%</span><span>8%</span>
-        </Participation>
-        <td>R$ 2000,00</td>
-        <td>51</td>
-        <td>
-          <ButtonAction>
-            <div>
-              <span><FaTrashAlt /></span>
-              <span><FaRedo /></span>
-            </div>
-          </ButtonAction>
-        </td>
-      </tr>
-    </tbody>
-  </Table>
-)
+const TableParticipation = ({ companies, contribute, handleContributeTotal }) => {
+  useEffect(() => {
+    let total = 0;
+    const listValue = document.querySelectorAll('.table__participation')
+
+    for (const item of listValue) {
+      const replaceDot = item.textContent.replace(/\,/, '.')
+      total += Number(replaceDot.replace(/\R\$/, ''))
+    }
+
+    handleContributeTotal(parseFloat(total).toFixed(2))
+  }, [contribute])
+
+  const handleParticipation = (value) => {
+    let total = 0
+
+    companies.map(item => {
+      total += item.participation
+    })
+
+    return parseInt(value / total * 100)
+  }
+
+  const handleAmount = (price, participation) => {
+    let amount = []
+    const contributeValue = handleParticipation(participation) * Number(contribute.split('.').join('')) / 100
+
+    for(let i = price; i <= contributeValue; i += price) {
+      amount.push(i)
+    }
+
+    return amount.length
+  }
+
+  const replaceDot = value => {
+    return value.toString().replace(/\./g, ',')
+  }
+
+  const handleContribute = (price, participation) => {
+    return replaceDot(parseFloat(handleAmount(price, participation) * price).toFixed(2))
+  }
+
+  return (
+    companies.length ? (
+      <Table>
+        <thead>
+          <tr>
+            <th width="100">Ação</th>
+            <th>Preço atual</th>
+            <th>Participação</th>
+            <th>Aporte</th>
+            <th>Quant.</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {companies.map((company, index) => (
+            <tr key={company.symbol + index}>
+              <td>{company.symbol}</td>
+              <td>R$ {replaceDot(company.price)}</td>
+              <Participation>
+              <span>{company.participation}%</span><span>{handleParticipation(company.participation)}%</span>
+              </Participation>
+              <td className='table__participation'>R$ {handleContribute(company.price, company.participation)}</td>
+              <td>{handleAmount(company.price, company.participation)}</td>
+              <td>
+                <ButtonAction>
+                  <div>
+                    <span><FaTrashAlt /></span>
+                    {/* <span><FaRedo /></span> */}
+                  </div>
+                </ButtonAction>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    ) : <Message><FaDollarSign /> Ainda não foi incluído nenhum ativo <FaDollarSign /></Message>
+  )
+}
 
 export { TableParticipation }

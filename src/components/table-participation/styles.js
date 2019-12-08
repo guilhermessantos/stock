@@ -23,6 +23,7 @@ export const Table = styled.table`
 
   tbody td:first-child {
     font-weight: bold;
+    text-transform: uppercase;
   }
 
   tbody td:last-child {
@@ -143,5 +144,18 @@ export const ButtonAction = styled.button`
   span + span {
     border-left: 2px solid #DDD;
     width: 32px;
+  }
+`
+
+export const Message = styled.div`
+  align-items: center;
+  color: #00214d;
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+  justify-content: center;
+
+  svg {
+    margin: 0 5px;
   }
 `
