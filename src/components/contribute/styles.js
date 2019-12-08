@@ -16,8 +16,20 @@ export const Container = styled.div`
 `
 
 export const Value = styled.div`
-  font-weight: bold;
-  font-size: 24px;
+  line-height: 1;
   margin-top: 24px;
   margin-left: 20px;
+  text-align: right;
+
+  strong {
+    font-weight: bold;
+    font-size: 28px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  small {
+    color: #666;
+    font-size: 15px;
+  }
 `
