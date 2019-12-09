@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { FaTrashAlt, FaDollarSign } from 'react-icons/fa'
 import { Table, Participation, ButtonAction, Message } from './styles'
 
-const TableParticipation = ({ companies, contribute, handleContributeTotal }) => {
+const TableParticipation = ({ companies, contribute, handleContributeTotal, handleRemoveCompany }) => {
   useEffect(() => {
     let total = 0;
     const listValue = document.querySelectorAll('.table__participation')
@@ -13,7 +13,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal }) =>
     }
 
     handleContributeTotal(parseFloat(total).toFixed(2))
-  }, [contribute])
+  }, [contribute, companies])
 
   const handleParticipation = (value) => {
     let total = 0
@@ -70,7 +70,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal }) =>
               <td>
                 <ButtonAction>
                   <div>
-                    <span><FaTrashAlt /></span>
+                    <button onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
                     {/* <span><FaRedo /></span> */}
                   </div>
                 </ButtonAction>

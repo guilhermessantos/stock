@@ -46,10 +46,9 @@ export const Participation = styled.td`
   }
 `
 
-export const ButtonAction = styled.button`
-  background: none;
-  border: 0;
+export const ButtonAction = styled.div`
   cursor: pointer;
+  display: inline-block;
   height: 30px;
   position: relative;
   width: 20px;
@@ -121,7 +120,8 @@ export const ButtonAction = styled.button`
     }
   }
 
-  span {
+  button {
+    border: 0;
     background: #fff;
     align-items: center;
     cursor: pointer;
