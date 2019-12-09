@@ -38,6 +38,10 @@ const Home = () => {
     setContributeTotal(value)
   }
 
+  const handleRemoveCompany = symbol => {
+    setCompanyValue(companyValue.filter(item => item.symbol !== symbol))
+  }
+
   return (
     <>
       <Head>
@@ -45,7 +49,12 @@ const Home = () => {
       </Head>
       <Contribute handleValue={handleValue} contribute={value} contributeTotal={contributeTotal} />
       <SearchCompany handleCompany={handleCompany} />
-      <TableParticipation companies={companyValue} contribute={value.replace(/R\$/, '')} handleContributeTotal={handleContributeTotal} />
+      <TableParticipation
+        companies={companyValue}
+        contribute={value.replace(/R\$/, '')}
+        handleContributeTotal={handleContributeTotal}
+        handleRemoveCompany={handleRemoveCompany}
+      />
       <GlobalStyle />
     </>
   )
