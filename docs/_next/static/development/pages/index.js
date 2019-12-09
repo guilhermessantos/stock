@@ -19754,7 +19754,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 var TableParticipation = function TableParticipation(_ref) {
   var companies = _ref.companies,
       contribute = _ref.contribute,
-      handleContributeTotal = _ref.handleContributeTotal;
+      handleContributeTotal = _ref.handleContributeTotal,
+      handleRemoveCompany = _ref.handleRemoveCompany;
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     var total = 0;
     var listValue = document.querySelectorAll('.table__participation');
@@ -19786,7 +19787,7 @@ var TableParticipation = function TableParticipation(_ref) {
     }
 
     handleContributeTotal(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_2___default()(total).toFixed(2));
-  }, [contribute]);
+  }, [contribute, companies]);
 
   var handleParticipation = function handleParticipation(value) {
     var total = 0;
@@ -19945,7 +19946,10 @@ var TableParticipation = function TableParticipation(_ref) {
         lineNumber: 72
       },
       __self: this
-    }, __jsx("span", {
+    }, __jsx("button", {
+      onClick: function onClick() {
+        return handleRemoveCompany(company.symbol);
+      },
       __source: {
         fileName: _jsxFileName,
         lineNumber: 73
@@ -20006,10 +20010,10 @@ var Participation = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].td
   displayName: "styles__Participation",
   componentId: "sc-1ugrlq0-1"
 })(["span{display:inline-block;width:40px;&:first-child{border-right:2px solid #DDD;}}span + span{text-align:right;}"]);
-var ButtonAction = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button.withConfig({
+var ButtonAction = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "styles__ButtonAction",
   componentId: "sc-1ugrlq0-2"
-})(["background:none;border:0;cursor:pointer;height:30px;position:relative;width:20px;&:hover{&::before{color:#00214d;}div{opacity:1;visibility:visible;transform:translate(-4px,-50%);}}&::before,div::before,div::after,div{position:absolute;top:50%;}&::before,div::before,div::after{content:'';}&::before{background:currentColor;border-radius:100%;box-shadow:0 7px 0 0 currentColor,0 -7px 0 0 currentColor;color:#DDD;height:4px;left:50%;transition:color .3s;transform:translate(-50%,-50%);width:4px;}div{border:2px solid #DDD;border-radius:5px;display:flex;height:28px;right:100%;transform:translate(10px,-50%);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s;&::before,&::after{border-width:7px;border-style:solid;transform:translateY(-50%);}&::before{border-color:transparent transparent transparent #DDD;left:100%;}&::after{border-color:transparent transparent transparent #fff;left:calc(100% - 2px);}}span{background:#fff;align-items:center;cursor:pointer;display:inline-flex;justify-content:center;width:30px;position:relative;z-index:1;svg{fill:#888;transition:fill .2s;}&:hover svg{fill:#00214d;}}span + span{border-left:2px solid #DDD;width:32px;}"]);
+})(["cursor:pointer;display:inline-block;height:30px;position:relative;width:20px;&:hover{&::before{color:#00214d;}div{opacity:1;visibility:visible;transform:translate(-4px,-50%);}}&::before,div::before,div::after,div{position:absolute;top:50%;}&::before,div::before,div::after{content:'';}&::before{background:currentColor;border-radius:100%;box-shadow:0 7px 0 0 currentColor,0 -7px 0 0 currentColor;color:#DDD;height:4px;left:50%;transition:color .3s;transform:translate(-50%,-50%);width:4px;}div{border:2px solid #DDD;border-radius:5px;display:flex;height:28px;right:100%;transform:translate(10px,-50%);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s;&::before,&::after{border-width:7px;border-style:solid;transform:translateY(-50%);}&::before{border-color:transparent transparent transparent #DDD;left:100%;}&::after{border-color:transparent transparent transparent #fff;left:calc(100% - 2px);}}button{border:0;background:#fff;align-items:center;cursor:pointer;display:inline-flex;justify-content:center;width:30px;position:relative;z-index:1;svg{fill:#888;transition:fill .2s;}&:hover svg{fill:#00214d;}}span + span{border-left:2px solid #DDD;width:32px;}"]);
 var Message = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "styles__Message",
   componentId: "sc-1ugrlq0-3"
@@ -20086,16 +20090,22 @@ var Home = function Home() {
     setContributeTotal(value);
   };
 
+  var handleRemoveCompany = function handleRemoveCompany(symbol) {
+    setCompanyValue(companyValue.filter(function (item) {
+      return item.symbol !== symbol;
+    }));
+  };
+
   return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 47
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 48
     },
     __self: this
   }, "Stock | Github")), __jsx(_components_contribute__WEBPACK_IMPORTED_MODULE_5__["Contribute"], {
@@ -20104,29 +20114,30 @@ var Home = function Home() {
     contributeTotal: contributeTotal,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 50
     },
     __self: this
   }), __jsx(_components_search_company__WEBPACK_IMPORTED_MODULE_6__["SearchCompany"], {
     handleCompany: handleCompany,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 51
     },
     __self: this
   }), __jsx(_components_table_participation__WEBPACK_IMPORTED_MODULE_7__["TableParticipation"], {
     companies: companyValue,
     contribute: value.replace(/R\$/, ''),
     handleContributeTotal: handleContributeTotal,
+    handleRemoveCompany: handleRemoveCompany,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 52
     },
     __self: this
   }), __jsx(_styles_global__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 58
     },
     __self: this
   }));
