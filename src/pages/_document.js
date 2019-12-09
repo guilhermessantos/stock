@@ -17,7 +17,7 @@ export default class App extends Document {
     return (
       <html>
         <Head>
-          <link rel="shortcut icon" href="/favicon.png" />
+          <link rel="shortcut icon" href="./favicon.png" />
           {this.props.styleTags}
         </Head>
 
