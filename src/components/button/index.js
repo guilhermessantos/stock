@@ -9,7 +9,7 @@ const Button = styled.button`
   font-size: 18px;
   font-weight: bold;
   height: 50px;
-  padding: 0 20px;
+  padding: 0 10px;
   transition: background .2s, color .2s;
 
   &:hover {
