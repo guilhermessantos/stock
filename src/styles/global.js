@@ -19,11 +19,14 @@ export default createGlobalStyle`
   body,
   input,
   button {
+    appearance: none;
     font-family: 'Source Sans Pro', sans-serif;
   }
 
   #__next {
     max-width: 660px;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
   }
