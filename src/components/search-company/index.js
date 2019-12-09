@@ -96,6 +96,7 @@ const SearchCompany = ({ handleCompany }) => {
           onValueChange={e => setValueParticipation(e.formattedValue)}
           format="##%"
           value={valueParticipation}
+          type="tel"
         />
       </Field>
 

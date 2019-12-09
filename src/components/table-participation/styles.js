@@ -13,12 +13,12 @@ export const Table = styled.table`
     height: 60px;
   }
 
-  tbody tr {
-    height: 50px;
+  tbody tr:nth-child(odd) {
+    background: #fdfdfd;
+  }
 
-    &:nth-child(odd) {
-      background: #fdfdfd;
-    }
+  tbody td {
+    height: 50px;
   }
 
   tbody td:first-child {
@@ -29,12 +29,99 @@ export const Table = styled.table`
   tbody td:last-child {
     text-align: right;
   }
+
+  @media (max-width: 479px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tbody tr {
+      border-top: 2px solid #DDD;
+      padding: 10px 0;
+    }
+
+    tbody td {
+      height: 30px;
+      line-height: 30px;
+      padding-left: 50%;
+      margin: 5px 0;
+      position: relative;
+
+      &:last-child {
+        text-align: left;
+      }
+    }
+
+    tbody td::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      white-space: nowrap;
+    }
+
+    td:nth-child(1)::before {
+      content: 'Ação';
+    }
+
+    td:nth-child(2)::before {
+      content: 'Preço atual';
+    }
+
+    td:nth-child(3)::before {
+      content: 'Participação';
+    }
+
+    td:nth-child(4)::before {
+      content: 'Aporte';
+    }
+
+    td:nth-child(5)::before {
+      content: 'Quant.';
+    }
+
+    .button__remove {
+      display: flex;
+      align-items: center;
+      border: 2px solid #DDD;
+      border-radius: 5px;
+      height: 30px;
+      width: 30px;
+      background: #FFF;
+      position: absolute;
+      right: 0;
+      justify-content: center;
+      top: 50%;
+      transform: translateY(-50%);
+
+      svg {
+        fill: #888;
+      }
+    }
+  }
+
+  @media (min-width: 600px) {
+    .table__contribute {
+      width: 140px;
+    }
+  }
 `
 
 export const Participation = styled.td`
   span {
     display: inline-block;
-    width: 40px;
+    width: 45px;
 
     &:first-child {
       border-right: 2px solid #DDD;

@@ -16,11 +16,14 @@ const rotate = keyframes`
 export const Container = styled.div`
   align-items: flex-end;
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 40px;
 
   ${FieldGroup} {
     position: relative;
-    min-width: 330px;
+    min-width: 100%;
+    flex: auto;
+    margin-bottom: 20px;
 
     > svg {
       fill: #00214d;
@@ -46,22 +49,42 @@ export const Container = styled.div`
     }
   }
 
+  > ${Field},
+  > ${Button} {
+    flex: 1;
+  }
+
   > ${Field} {
-    margin: 0 30px;
+    margin-right: 20px;
   }
 
   > ${Button} {
-    min-width: 150px;
+    max-width: 130px;
+    min-width: auto;
+  }
+
+  @media (min-width: 480px) {
+    flex-wrap: initial;
+
+    ${FieldGroup} {
+      margin-bottom: 0;
+      min-width: 220px;
+      max-width: 330px;
+    }
+
+    > ${Field} {
+      margin: 0 20px;
+    }
   }
 `
 
 export const Message = styled.div`
+  bottom: calc(100%);
   align-items: center;
   color: #ec7669;
   font-size: 14px;
   display: flex;
   position: absolute;
-  top: calc(100% + 5px);
 
   svg {
     margin-right: 5px;
@@ -70,5 +93,10 @@ export const Message = styled.div`
   strong {
     margin-left: 4px;
     text-transform: uppercase;
+  }
+
+  @media (min-width: 480px) {
+    bottom: auto;
+    top: calc(100% + 5px);
   }
 `
