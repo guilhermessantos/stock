@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { MediaQuery } from 'react-responsive-hoc'
 import { FaTrashAlt, FaDollarSign } from 'react-icons/fa'
 import { Table, Participation, ButtonAction, Message } from './styles'
 
@@ -52,29 +53,38 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
             <th width="100">Ação</th>
             <th>Preço atual</th>
             <th>Participação</th>
-            <th>Aporte</th>
+            <th className="table__contribute">Aporte</th>
             <th>Quant.</th>
-            <th></th>
+            <MediaQuery query="(min-device-width: 480px)">
+              <th></th>
+            </MediaQuery>
           </tr>
         </thead>
         <tbody>
           {companies.map((company, index) => (
             <tr key={company.symbol + index}>
-              <td>{company.symbol}</td>
+              <td>
+                {company.symbol}
+                <MediaQuery query="(max-device-width: 479px)">
+                  <button className="button__remove" onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
+                </MediaQuery>
+              </td>
               <td>R$ {replaceDot(company.price)}</td>
               <Participation>
               <span>{company.participation}%</span><span>{handleParticipation(company.participation)}%</span>
               </Participation>
-              <td className='table__participation'>R$ {handleContribute(company.price, company.participation)}</td>
+              <td className="table__participation">R$ {handleContribute(company.price, company.participation)}</td>
               <td>{handleAmount(company.price, company.participation)}</td>
-              <td>
-                <ButtonAction>
-                  <div>
-                    <button onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
-                    {/* <span><FaRedo /></span> */}
-                  </div>
-                </ButtonAction>
-              </td>
+              <MediaQuery query="(min-device-width: 480px)">
+                <td>
+                    <ButtonAction>
+                      <div>
+                        <button onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
+                        {/* <span><FaRedo /></span> */}
+                      </div>
+                    </ButtonAction>
+                </td>
+              </MediaQuery>
             </tr>
           ))}
         </tbody>
