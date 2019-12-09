@@ -13,7 +13,16 @@ export default createGlobalStyle`
   html,
   body,
   #root {
-    min-height: 100%;
+    height: 100%;
+  }
+
+  body {
+    padding-top: 15px;
+
+    @media (min-width: 480px) {
+      padding-bottom: 40px;
+      padding-top: 40px;
+    }
   }
 
   body,
@@ -29,5 +38,29 @@ export default createGlobalStyle`
     padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .link_github {
+    top: 0;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+
+    &::before {
+      border-color: #DDD #DDD transparent transparent;
+      border-style: solid;
+      border-width: 28px;
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    svg {
+      fill: #00214d;
+      position: relative;
+      top: 10px;
+      right: 6px;
+    }
   }
 `

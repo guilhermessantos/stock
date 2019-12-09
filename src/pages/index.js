@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { FaGithub } from 'react-icons/fa'
 import GlobalStyle from '../styles/global'
 import { Contribute } from '../components/contribute'
 import { SearchCompany } from '../components/search-company'
@@ -55,6 +56,9 @@ const Home = () => {
         handleContributeTotal={handleContributeTotal}
         handleRemoveCompany={handleRemoveCompany}
       />
+      <a className="link_github" href="https://github.com/guilhermessantos/stock">
+        <FaGithub size="18" />
+      </a>
       <GlobalStyle />
     </>
   )
