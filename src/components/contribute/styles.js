@@ -6,12 +6,15 @@ export const Container = styled.div`
   align-items: center;
   border-bottom: 2px solid #DDD;
   margin-bottom: 30px;
-  margin-top: 15px;
   justify-content: space-between;
   padding-bottom: 20px;
 
   ${FieldGroup} {
     width: 100%;
+
+    @media (min-width: 480px) {
+      width: 330px;
+    }
   }
 
   @media (max-width: 479px) {
@@ -19,14 +22,6 @@ export const Container = styled.div`
 
     ${FieldGroup} {
       order: 2;
-    }
-  }
-
-  @media (min-width: 480px) {
-    margin-top: 40px;
-
-    ${FieldGroup} {
-      width: 330px;
     }
   }
 `
