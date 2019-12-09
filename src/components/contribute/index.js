@@ -23,6 +23,7 @@ const Contribute = ({ handleValue, contribute, contributeTotal }) => {
             onValueChange={e => setFieldValue(e.formattedValue)}
             value={fieldValue}
             prefix="R$ "
+            type="tel"
           />
         </Field>
 
