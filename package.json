@@ -9,7 +9,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "yarn build && next export -o out"
+    "export": "yarn build && next export -o docs"
   },
   "dependencies": {
     "next": "^9.1.4",
