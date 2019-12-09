@@ -89,7 +89,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
           ))}
         </tbody>
       </Table>
-    ) : <Message><FaDollarSign /> Ainda não foi incluído nenhum ativo <FaDollarSign /></Message>
+    ) : <Message><FaDollarSign /> Ainda não foi incluído ativo <FaDollarSign /></Message>
   )
 }
 
