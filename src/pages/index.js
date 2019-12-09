@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Head from 'next/head'
 import GlobalStyle from '../styles/global'
 import { Contribute } from '../components/contribute'
 import { SearchCompany } from '../components/search-company'
@@ -39,6 +40,9 @@ const Home = () => {
 
   return (
     <>
+      <Head>
+        <title>Stock | Github</title>
+      </Head>
       <Contribute handleValue={handleValue} contribute={value} contributeTotal={contributeTotal} />
       <SearchCompany handleCompany={handleCompany} />
       <TableParticipation companies={companyValue} contribute={value.replace(/R\$/, '')} handleContributeTotal={handleContributeTotal} />
