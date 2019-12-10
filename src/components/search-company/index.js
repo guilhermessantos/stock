@@ -95,12 +95,14 @@ const SearchCompany = ({ handleCompany }) => {
           placeholder="10%"
           onValueChange={e => setValueParticipation(e.formattedValue)}
           format="##%"
-          value={valueParticipation}
+          value={company ? valueParticipation : ''}
+          disabled={!company}
           type="tel"
         />
       </Field>
 
       <Button
+        disabled={!valueParticipation.length}
         onClick={() => (valueCompany.length && valueParticipation.length && !messageInfo) && save()}
       >Cadastrar</Button>
     </Container>
