@@ -20989,7 +20989,7 @@ var Contribute = function Contribute(_ref) {
       lineNumber: 42
     },
     __self: this
-  }, "R$ ", contributeTotal ? contributeTotal : 0)));
+  }, "R$ ", contributeTotal ? contributeTotal.toString().replace(/\./g, ',') : 0)));
 };
 
 
@@ -21204,8 +21204,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 var SearchCompany = function SearchCompany(_ref) {
-  var handleCompany = _ref.handleCompany;
-  var refInputSymbol = Object(react__WEBPACK_IMPORTED_MODULE_11__["useRef"])(0);
+  var handleCompany = _ref.handleCompany,
+      refProp = _ref.refProp;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_11__["useState"])(''),
       valueCompany = _useState[0],
@@ -21302,13 +21302,13 @@ var SearchCompany = function SearchCompany(_ref) {
     hasCompany: company,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 57
     },
     __self: this
   }, __jsx(_field_group__WEBPACK_IMPORTED_MODULE_15__["FieldGroup"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 58
     },
     __self: this
   }, __jsx(_field__WEBPACK_IMPORTED_MODULE_13__["Field"], {
@@ -21321,10 +21321,10 @@ var SearchCompany = function SearchCompany(_ref) {
     disabled: load || company || messageInfo,
     error: messageInfo,
     value: valueCompany,
-    refProp: refInputSymbol,
+    refProp: refProp,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 59
     },
     __self: this
   }), company || messageInfo ? __jsx(_button__WEBPACK_IMPORTED_MODULE_14__["Button"], {
@@ -21337,13 +21337,13 @@ var SearchCompany = function SearchCompany(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 71
     },
     __self: this
   }, !load ? 'Editar' : __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_17__["FaSyncAlt"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 80
     },
     __self: this
   })) : __jsx(_button__WEBPACK_IMPORTED_MODULE_14__["Button"], {
@@ -21353,45 +21353,45 @@ var SearchCompany = function SearchCompany(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 82
     },
     __self: this
   }, !load ? 'Buscar' : __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_17__["FaSyncAlt"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 82
     },
     __self: this
   })), __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_17__["FaCheckCircle"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 84
     },
     __self: this
   }), messageInfo && __jsx(_styles__WEBPACK_IMPORTED_MODULE_16__["Message"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 85
     },
     __self: this
   }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_17__["FaExclamationCircle"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 85
     },
     __self: this
   }), "N\xE3o foi possivel encontrar o ativo: ", __jsx("strong", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 85
     },
     __self: this
   }, valueCompany))), __jsx(_field__WEBPACK_IMPORTED_MODULE_13__["Field"], {
-    label: "Participa\xE7\xE3o",
+    label: "Aloca\xE7\xE3o",
     id: "participation",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 88
     },
     __self: this
   }, __jsx(react_number_format__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -21401,14 +21401,16 @@ var SearchCompany = function SearchCompany(_ref) {
       return setValueParticipation(e.formattedValue);
     },
     format: "##%",
-    value: valueParticipation,
+    value: company ? valueParticipation : '',
+    disabled: !company,
     type: "tel",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 92
     },
     __self: this
   })), __jsx(_button__WEBPACK_IMPORTED_MODULE_14__["Button"], {
+    disabled: !valueParticipation.length,
     onClick: function onClick() {
       return valueCompany.length && valueParticipation.length && !messageInfo && save();
     },
@@ -21597,7 +21599,7 @@ var TableParticipation = function TableParticipation(_ref) {
       lineNumber: 55
     },
     __self: this
-  }, "Participa\xE7\xE3o"), __jsx("th", {
+  }, "Aloca\xE7\xE3o"), __jsx("th", {
     className: "table__contribute",
     __source: {
       fileName: _jsxFileName,
@@ -21611,7 +21613,7 @@ var TableParticipation = function TableParticipation(_ref) {
     },
     __self: this
   }, "Quant."), __jsx(react_responsive_hoc__WEBPACK_IMPORTED_MODULE_4__["MediaQuery"], {
-    query: "(min-device-width: 480px)",
+    query: "(min-width: 480px)",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 58
@@ -21644,7 +21646,7 @@ var TableParticipation = function TableParticipation(_ref) {
       },
       __self: this
     }, company.symbol, __jsx(react_responsive_hoc__WEBPACK_IMPORTED_MODULE_4__["MediaQuery"], {
-      query: "(max-device-width: 479px)",
+      query: "(max-width: 479px)",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 68
@@ -21704,7 +21706,7 @@ var TableParticipation = function TableParticipation(_ref) {
       },
       __self: this
     }, handleAmount(company.price, company.participation)), __jsx(react_responsive_hoc__WEBPACK_IMPORTED_MODULE_4__["MediaQuery"], {
-      query: "(min-device-width: 480px)",
+      query: "(min-width: 480px)",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 78
@@ -21787,7 +21789,7 @@ __webpack_require__.r(__webpack_exports__);
 var Table = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].table.withConfig({
   displayName: "styles__Table",
   componentId: "sc-1ugrlq0-0"
-})(["color:#666;border-collapse:collapse;text-align:left;width:100%;thead tr{color:#00214d;border-top:2px solid #DDD;border-bottom:2px solid #DDD;height:60px;}tbody tr:nth-child(odd){background:#fdfdfd;}tbody td{height:50px;}tbody td:first-child{font-weight:bold;text-transform:uppercase;}tbody td:last-child{text-align:right;}@media (max-width:479px){table,thead,tbody,th,td,tr{display:block;}thead tr{position:absolute;top:-9999px;left:-9999px;}tbody tr{border-top:2px solid #DDD;padding:10px 0;}tbody td{height:30px;line-height:30px;padding-left:50%;margin:5px 0;position:relative;&:last-child{text-align:left;}}tbody td::before{position:absolute;top:0;left:0;width:50%;white-space:nowrap;}td:nth-child(1)::before{content:'A\xE7\xE3o';}td:nth-child(2)::before{content:'Pre\xE7o atual';}td:nth-child(3)::before{content:'Participa\xE7\xE3o';}td:nth-child(4)::before{content:'Aporte';}td:nth-child(5)::before{content:'Quant.';}.button__remove{display:flex;align-items:center;border:2px solid #DDD;border-radius:5px;height:30px;width:30px;background:#FFF;position:absolute;right:0;justify-content:center;top:50%;transform:translateY(-50%);svg{fill:#888;}}}@media (min-width:600px){.table__contribute{width:140px;}}"]);
+})(["color:#666;border-collapse:collapse;text-align:left;width:100%;thead tr{color:#00214d;border-top:2px solid #DDD;border-bottom:2px solid #DDD;height:60px;}tbody tr:nth-child(odd){background:#fdfdfd;}tbody td{height:50px;}tbody td:first-child{font-weight:bold;text-transform:uppercase;}tbody td:last-child{text-align:right;}@media (max-width:479px){table,thead,tbody,th,td,tr{display:block;}thead tr{position:absolute;top:-9999px;left:-9999px;}tbody tr{border-top:2px solid #DDD;padding:10px 0;}tbody td{height:30px;line-height:30px;padding-left:50%;margin:5px 0;position:relative;&:last-child{text-align:left;}}tbody td::before{position:absolute;top:0;left:0;width:50%;white-space:nowrap;}td:nth-child(1)::before{content:'A\xE7\xE3o';}td:nth-child(2)::before{content:'Pre\xE7o atual';}td:nth-child(3)::before{content:'Aloca\xE7\xE3o';}td:nth-child(4)::before{content:'Aporte';}td:nth-child(5)::before{content:'Quant.';}.button__remove{display:flex;align-items:center;border:2px solid #DDD;border-radius:5px;height:30px;width:30px;background:#FFF;position:absolute;right:0;justify-content:center;top:50%;transform:translateY(-50%);svg{fill:#888;}}}@media (min-width:600px){.table__contribute{width:140px;}}"]);
 var Participation = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].td.withConfig({
   displayName: "styles__Participation",
   componentId: "sc-1ugrlq0-1"
@@ -21837,6 +21839,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 var Home = function Home() {
+  var refInputSymbol = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])(0);
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('R$ 0'),
       value = _useState[0],
       setValue = _useState[1];
@@ -21849,14 +21853,20 @@ var Home = function Home() {
       contributeTotal = _useState3[0],
       setContributeTotal = _useState3[1];
 
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
+      load = _useState4[0],
+      setLoad = _useState4[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     var storageCompanies = localStorage.getItem('companies');
     var storageValue = localStorage.getItem('value');
     storageCompanies && setCompanyValue(JSON.parse(storageCompanies));
     storageValue && setValue("R$ ".concat(storageValue));
+    setLoad(false);
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     localStorage.setItem('companies', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(companyValue));
+    refInputSymbol.current.focus();
   }, [companyValue]);
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     localStorage.setItem('value', value.replace(/R\$/, ''));
@@ -21883,13 +21893,13 @@ var Home = function Home() {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 52
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 53
     },
     __self: this
   }, "Stock | Github")), __jsx(_components_contribute__WEBPACK_IMPORTED_MODULE_6__["Contribute"], {
@@ -21898,14 +21908,15 @@ var Home = function Home() {
     contributeTotal: contributeTotal,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 55
     },
     __self: this
   }), __jsx(_components_search_company__WEBPACK_IMPORTED_MODULE_7__["SearchCompany"], {
+    refProp: refInputSymbol,
     handleCompany: handleCompany,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 56
     },
     __self: this
   }), __jsx(_components_table_participation__WEBPACK_IMPORTED_MODULE_8__["TableParticipation"], {
@@ -21915,7 +21926,7 @@ var Home = function Home() {
     handleRemoveCompany: handleRemoveCompany,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 57
     },
     __self: this
   }), __jsx("a", {
@@ -21923,23 +21934,37 @@ var Home = function Home() {
     href: "https://github.com/guilhermessantos/stock",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 63
     },
     __self: this
   }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaGithub"], {
     size: "18",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 64
     },
     __self: this
   })), __jsx(_styles_global__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 66
     },
     __self: this
-  }));
+  }), load && __jsx("div", {
+    className: "load",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: this
+  }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaSyncAlt"], {
+    size: "30",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67
+    },
+    __self: this
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
@@ -21959,8 +21984,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 
 
+function _templateObject2() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');\n\n  * {\n    box-sizing: border-box;\n    margin: 0;\n    outline: 0;\n    padding: 0;\n  }\n\n  html,\n  body,\n  #root {\n    height: 100%;\n  }\n\n  body {\n    padding-top: 15px;\n\n    @media (min-width: 480px) {\n      padding-bottom: 40px;\n      padding-top: 40px;\n    }\n  }\n\n  body,\n  input,\n  button {\n    appearance: none;\n    font-family: 'Source Sans Pro', sans-serif;\n  }\n\n  #__next {\n    max-width: 660px;\n    padding-left: 15px;\n    padding-right: 15px;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  .link_github {\n    top: 0;\n    position: absolute;\n    right: 0;\n    text-decoration: none;\n\n    &::before {\n      border-color: #DDD #DDD transparent transparent;\n      border-style: solid;\n      border-width: 28px;\n      content: \"\";\n      position: absolute;\n      top: 0;\n      right: 0;\n    }\n\n    svg {\n      fill: #00214d;\n      position: relative;\n      top: 10px;\n      right: 6px;\n    }\n  }\n\n  .load {\n    align-items: center;\n    display: flex;\n    background: #fff;\n    bottom: 0;\n    justify-content: center;\n    left: 0;\n    position: fixed;\n    right: 0;\n    top: 0;\n\n    svg {\n      fill: #00ebc7;\n      animation: ", " .4s linear infinite;\n    }\n  }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');\n\n  * {\n    box-sizing: border-box;\n    margin: 0;\n    outline: 0;\n    padding: 0;\n  }\n\n  html,\n  body,\n  #root {\n    height: 100%;\n  }\n\n  body {\n    padding-top: 15px;\n\n    @media (min-width: 480px) {\n      padding-bottom: 40px;\n      padding-top: 40px;\n    }\n  }\n\n  body,\n  input,\n  button {\n    appearance: none;\n    font-family: 'Source Sans Pro', sans-serif;\n  }\n\n  #__next {\n    max-width: 660px;\n    padding-left: 15px;\n    padding-right: 15px;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  .link_github {\n    top: 0;\n    position: absolute;\n    right: 0;\n    text-decoration: none;\n\n    &::before {\n      border-color: #DDD #DDD transparent transparent;\n      border-style: solid;\n      border-width: 28px;\n      content: \"\";\n      position: absolute;\n      top: 0;\n      right: 0;\n    }\n\n    svg {\n      fill: #00214d;\n      position: relative;\n      top: 10px;\n      right: 6px;\n    }\n  }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  from {\n    transform: rotate(0)\n  }\n\n  to {\n    transform: rotate(360deg)\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -21970,7 +22005,8 @@ function _templateObject() {
 }
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"])(_templateObject()));
+var rotate = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["keyframes"])(_templateObject());
+/* harmony default export */ __webpack_exports__["default"] = (Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"])(_templateObject2(), rotate));
 
 /***/ }),
 
