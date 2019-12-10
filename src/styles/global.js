@@ -1,4 +1,14 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, keyframes } from 'styled-components'
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+`
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
@@ -61,6 +71,23 @@ export default createGlobalStyle`
       position: relative;
       top: 10px;
       right: 6px;
+    }
+  }
+
+  .load {
+    align-items: center;
+    display: flex;
+    background: #fff;
+    bottom: 0;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    svg {
+      fill: #00ebc7;
+      animation: ${rotate} .4s linear infinite;
     }
   }
 `
