@@ -87,7 +87,7 @@ const SearchCompany = ({ handleCompany }) => {
       </FieldGroup>
 
       <Field
-        label="Participação"
+        label="Alocação"
         id="participation"
       >
         <NumberFormat

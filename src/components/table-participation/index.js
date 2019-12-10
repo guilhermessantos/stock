@@ -52,7 +52,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
           <tr>
             <th width="100">Ação</th>
             <th>Preço atual</th>
-            <th>Participação</th>
+            <th>Alocação</th>
             <th className="table__contribute">Aporte</th>
             <th>Quant.</th>
             <MediaQuery query="(min-width: 480px)">
