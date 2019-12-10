@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import NumberFormat from 'react-number-format'
 import { Field } from '../field'
 import { Button } from '../button'
@@ -6,8 +6,7 @@ import { FieldGroup } from '../field-group'
 import { Container, Message } from './styles'
 import { FaSyncAlt, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa'
 
-const SearchCompany = ({ handleCompany }) => {
-  const refInputSymbol = useRef(0)
+const SearchCompany = ({ handleCompany, refProp }) => {
   const [valueCompany, setValueCompany] = useState('')
   const [load, setLoad] = useState(false)
   const [company, setCompany] = useState(false)
@@ -65,7 +64,7 @@ const SearchCompany = ({ handleCompany }) => {
           disabled={load || company || messageInfo}
           error={messageInfo}
           value={valueCompany}
-          refProp={refInputSymbol}
+          refProp={refProp}
         />
 
         {company || messageInfo ?
@@ -87,7 +86,7 @@ const SearchCompany = ({ handleCompany }) => {
       </FieldGroup>
 
       <Field
-        label="Participação"
+        label="Alocação"
         id="participation"
       >
         <NumberFormat
@@ -95,12 +94,14 @@ const SearchCompany = ({ handleCompany }) => {
           placeholder="10%"
           onValueChange={e => setValueParticipation(e.formattedValue)}
           format="##%"
-          value={valueParticipation}
+          value={company ? valueParticipation : ''}
+          disabled={!company}
           type="tel"
         />
       </Field>
 
       <Button
+        disabled={!valueParticipation.length}
         onClick={() => (valueCompany.length && valueParticipation.length && !messageInfo) && save()}
       >Cadastrar</Button>
     </Container>

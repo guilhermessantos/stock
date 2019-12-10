@@ -80,7 +80,7 @@ export const Table = styled.table`
     }
 
     td:nth-child(3)::before {
-      content: 'Participação';
+      content: 'Alocação';
     }
 
     td:nth-child(4)::before {

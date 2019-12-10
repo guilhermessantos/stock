@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Head from 'next/head'
-import { FaGithub } from 'react-icons/fa'
+import { FaGithub, FaSyncAlt } from 'react-icons/fa'
 import GlobalStyle from '../styles/global'
 import { Contribute } from '../components/contribute'
 import { SearchCompany } from '../components/search-company'
 import { TableParticipation } from '../components/table-participation'
 
 const Home = () => {
+  const refInputSymbol = useRef(0)
   const [value, setValue] = useState('R$ 0')
   const [companyValue, setCompanyValue] = useState([])
   const [contributeTotal, setContributeTotal] = useState(0)
+  const [load, setLoad] = useState(true)
 
   useEffect(() => {
     const storageCompanies = localStorage.getItem('companies')
@@ -17,10 +19,12 @@ const Home = () => {
 
     storageCompanies && setCompanyValue(JSON.parse(storageCompanies))
     storageValue && setValue(`R$ ${storageValue}`)
+    setLoad(false)
   }, [])
 
   useEffect(() => {
     localStorage.setItem('companies', JSON.stringify(companyValue))
+    refInputSymbol.current.focus()
   }, [companyValue])
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const Home = () => {
         <title>Stock | Github</title>
       </Head>
       <Contribute handleValue={handleValue} contribute={value} contributeTotal={contributeTotal} />
-      <SearchCompany handleCompany={handleCompany} />
+      <SearchCompany refProp={refInputSymbol} handleCompany={handleCompany} />
       <TableParticipation
         companies={companyValue}
         contribute={value.replace(/R\$/, '')}
@@ -60,6 +64,7 @@ const Home = () => {
         <FaGithub size="18" />
       </a>
       <GlobalStyle />
+      {load && <div className="load"><FaSyncAlt size="30" /></div>}
     </>
   )
 }

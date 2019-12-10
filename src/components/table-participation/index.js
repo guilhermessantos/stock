@@ -52,10 +52,10 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
           <tr>
             <th width="100">Ação</th>
             <th>Preço atual</th>
-            <th>Participação</th>
+            <th>Alocação</th>
             <th className="table__contribute">Aporte</th>
             <th>Quant.</th>
-            <MediaQuery query="(min-device-width: 480px)">
+            <MediaQuery query="(min-width: 480px)">
               <th></th>
             </MediaQuery>
           </tr>
@@ -65,7 +65,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
             <tr key={company.symbol + index}>
               <td>
                 {company.symbol}
-                <MediaQuery query="(max-device-width: 479px)">
+                <MediaQuery query="(max-width: 479px)">
                   <button className="button__remove" onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
                 </MediaQuery>
               </td>
@@ -75,7 +75,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
               </Participation>
               <td className="table__participation">R$ {handleContribute(company.price, company.participation)}</td>
               <td>{handleAmount(company.price, company.participation)}</td>
-              <MediaQuery query="(min-device-width: 480px)">
+              <MediaQuery query="(min-width: 480px)">
                 <td>
                     <ButtonAction>
                       <div>

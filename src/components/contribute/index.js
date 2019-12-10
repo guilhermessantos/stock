@@ -39,7 +39,7 @@ const Contribute = ({ handleValue, contribute, contributeTotal }) => {
 
       <Value>
         <strong>{contribute}</strong>
-        <small>R$ {contributeTotal ? contributeTotal : 0}</small>
+        <small>R$ {contributeTotal ? contributeTotal.toString().replace(/\./g, ',') : 0}</small>
       </Value>
     </Container>
   )
