@@ -2,7 +2,7 @@
 Simple control for allocation in investments.
 
 ## Usage API
-Usage the free api for global quote search https://www.alphavantage.co/
+Usage the free api for global quote search [Alpha Vantage](https://www.alphavantage.co/)
 
 `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo`
 
