@@ -90,4 +90,72 @@ export default createGlobalStyle`
       animation: ${rotate} .4s linear infinite;
     }
   }
+
+  .footer {
+    margin: 40px 0;
+    position: relative;
+    text-align: center;
+
+    div,
+    div::before,
+    div::after {
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+    }
+
+    div,
+    span {
+      display: inline-flex;
+    }
+
+    div {
+      border: 2px solid #DDD;
+      bottom: 100%;
+      border-radius: 5px;
+      height: 28px;
+      transition: opacity .2s, transform .2s, visibility .2s;
+      opacity: 0;
+      visibility: hidden;
+
+      &.show-options-remove {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -8px);
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        border-width: 7px;
+        border-style: solid;
+      }
+
+      &::before {
+        border-color: #DDD transparent transparent transparent;
+        top: 100%;
+      }
+
+      &::after {
+        border-color: #fff transparent transparent transparent;
+        top: calc(100% - 2px);
+      }
+    }
+
+    span {
+      color: #666;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: color .2s;
+      text-transform: uppercase;
+      width: 40px;
+
+      &:hover {
+        color: #00214d;
+      }
+    }
+  }
 `
