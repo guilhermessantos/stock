@@ -20879,12 +20879,20 @@ __webpack_require__.r(__webpack_exports__);
 var Button = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button.withConfig({
   displayName: "button__Button",
   componentId: "cl4tr0-0"
-})(["background:", ";border:0;border-radius:5px;color:", ";cursor:pointer;font-size:18px;font-weight:bold;height:50px;padding:0 10px;transition:background .2s,color .2s;&:hover{background:", ";}&:disabled{background:#DDD;color:#555;cursor:default;}"], function (props) {
-  return props.error ? '#ec7669' : '#00ebc7';
+})(["border:0;border-radius:5px;cursor:pointer;font-weight:bold;transition:background .2s,color .2s;", " ", " ", " ", " &:disabled{background:#DDD;color:#555;cursor:default;}"], function (props) {
+  return !props.secondary && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(["background:", ";color:", ";&:hover{background:", ";}"], function (props) {
+    return props.error ? '#ec7669' : '#00ebc7';
+  }, function (props) {
+    return props.error ? '#FFF' : '#00214d;';
+  }, function (props) {
+    return props.error ? '#d45345' : '#0be4c4';
+  });
 }, function (props) {
-  return props.error ? '#FFF' : '#00214d;';
+  return props.secondary && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(["background:none;border:2px solid #DDD;color:#555;&:hover{background:#f8f8f8;}"]);
 }, function (props) {
-  return props.error ? '#d45345' : '#0be4c4';
+  return !props.size && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(["font-size:18px;height:50px;padding:0 10px;"]);
+}, function (props) {
+  return props.size && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(["font-size:16px;height:35px;padding:0 20px;"]);
 });
 
 
@@ -21501,7 +21509,9 @@ var TableParticipation = function TableParticipation(_ref) {
   var companies = _ref.companies,
       contribute = _ref.contribute,
       handleContributeTotal = _ref.handleContributeTotal,
-      handleRemoveCompany = _ref.handleRemoveCompany;
+      handleRemoveCompany = _ref.handleRemoveCompany,
+      handleUpdateCompany = _ref.handleUpdateCompany,
+      loadUpdate = _ref.loadUpdate;
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     var total = 0;
     var listValue = document.querySelectorAll('.table__participation');
@@ -21533,7 +21543,7 @@ var TableParticipation = function TableParticipation(_ref) {
     }
 
     handleContributeTotal(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_2___default()(total).toFixed(2));
-  }, [contribute, companies]);
+  }, [contribute, companies, loadUpdate]);
 
   var handleParticipation = function handleParticipation(value) {
     var total = 0;
@@ -21634,6 +21644,7 @@ var TableParticipation = function TableParticipation(_ref) {
   }, companies.map(function (company, index) {
     return __jsx("tr", {
       key: company.symbol + index,
+      className: loadUpdate.load && loadUpdate.symbol == company.symbol && 'active-load',
       __source: {
         fileName: _jsxFileName,
         lineNumber: 65
@@ -21674,60 +21685,68 @@ var TableParticipation = function TableParticipation(_ref) {
         lineNumber: 72
       },
       __self: this
-    }, "R$ ", replaceDot(company.price)), __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Participation"], {
+    }, loadUpdate.load && loadUpdate.symbol == company.symbol ? __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaSyncAlt"], {
+      className: "load-item",
+      size: "15",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 73
       },
       __self: this
+    }) : "R$ ".concat(replaceDot(company.price))), __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Participation"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 75
+      },
+      __self: this
     }, __jsx("span", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 74
+        lineNumber: 76
       },
       __self: this
     }, company.participation, "%"), __jsx("span", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 74
+        lineNumber: 76
       },
       __self: this
     }, handleParticipation(company.participation), "%")), __jsx("td", {
       className: "table__participation",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 76
+        lineNumber: 78
       },
       __self: this
     }, "R$ ", handleContribute(company.price, company.participation)), __jsx("td", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 77
+        lineNumber: 79
       },
       __self: this
     }, handleAmount(company.price, company.participation)), __jsx(react_responsive_hoc__WEBPACK_IMPORTED_MODULE_4__["MediaQuery"], {
       query: "(min-width: 480px)",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 78
+        lineNumber: 80
       },
       __self: this
     }, __jsx("td", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 79
+        lineNumber: 81
       },
       __self: this
     }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["ButtonAction"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 80
+        lineNumber: 82
       },
       __self: this
     }, __jsx("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 81
+        lineNumber: 83
       },
       __self: this
     }, __jsx("button", {
@@ -21736,32 +21755,47 @@ var TableParticipation = function TableParticipation(_ref) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 82
+        lineNumber: 84
       },
       __self: this
     }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaTrashAlt"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 82
+        lineNumber: 84
+      },
+      __self: this
+    })), __jsx("button", {
+      onClick: function onClick() {
+        return handleUpdateCompany(company.symbol);
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 85
+      },
+      __self: this
+    }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaRedo"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 85
       },
       __self: this
     })))))));
   }))) : __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Message"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 94
     },
     __self: this
   }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaDollarSign"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 94
     },
     __self: this
   }), " Ainda n\xE3o foi inclu\xEDdo ativo ", __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaDollarSign"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 94
     },
     __self: this
   }));
@@ -21786,10 +21820,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return Message; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 
+var rotate = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["keyframes"])(["from{transform:rotate(0)}to{transform:rotate(360deg)}"]);
 var Table = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].table.withConfig({
   displayName: "styles__Table",
   componentId: "sc-1ugrlq0-0"
-})(["color:#666;border-collapse:collapse;text-align:left;width:100%;thead tr{color:#00214d;border-top:2px solid #DDD;border-bottom:2px solid #DDD;height:60px;}tbody tr:nth-child(odd){background:#fdfdfd;}tbody td{height:50px;}tbody td:first-child{font-weight:bold;text-transform:uppercase;}tbody td:last-child{text-align:right;}@media (max-width:479px){table,thead,tbody,th,td,tr{display:block;}thead tr{position:absolute;top:-9999px;left:-9999px;}tbody tr{border-top:2px solid #DDD;padding:10px 0;}tbody td{height:30px;line-height:30px;padding-left:50%;margin:5px 0;position:relative;&:last-child{text-align:left;}}tbody td::before{position:absolute;top:0;left:0;width:50%;white-space:nowrap;}td:nth-child(1)::before{content:'A\xE7\xE3o';}td:nth-child(2)::before{content:'Pre\xE7o atual';}td:nth-child(3)::before{content:'Aloca\xE7\xE3o';}td:nth-child(4)::before{content:'Aporte';}td:nth-child(5)::before{content:'Quant.';}.button__remove{display:flex;align-items:center;border:2px solid #DDD;border-radius:5px;height:30px;width:30px;background:#FFF;position:absolute;right:0;justify-content:center;top:50%;transform:translateY(-50%);svg{fill:#888;}}}@media (min-width:600px){.table__contribute{width:140px;}}"]);
+})(["color:#666;border-collapse:collapse;text-align:left;width:100%;thead tr{color:#00214d;border-top:2px solid #DDD;border-bottom:2px solid #DDD;transition:opacity .2s;height:60px;}tbody tr:nth-child(odd){background:#fdfdfd;}tbody td{height:50px;}tbody td:first-child{font-weight:bold;text-transform:uppercase;}tbody td:last-child{text-align:right;}.load-item{animation:", " .4s linear infinite;margin-left:20px;}.active-load{opacity:.3;pointer-events:none;}@media (max-width:479px){table,thead,tbody,th,td,tr{display:block;}thead tr{position:absolute;top:-9999px;left:-9999px;}tbody tr{border-top:2px solid #DDD;padding:10px 0;}tbody td{height:30px;line-height:30px;padding-left:50%;margin:5px 0;position:relative;&:last-child{text-align:left;}}tbody td::before{position:absolute;top:0;left:0;width:50%;white-space:nowrap;}td:nth-child(1)::before{content:'A\xE7\xE3o';}td:nth-child(2)::before{content:'Pre\xE7o atual';}td:nth-child(3)::before{content:'Aloca\xE7\xE3o';}td:nth-child(4)::before{content:'Aporte';}td:nth-child(5)::before{content:'Quant.';}.button__remove{display:flex;align-items:center;border:2px solid #DDD;border-radius:5px;height:30px;width:30px;background:#FFF;position:absolute;right:0;justify-content:center;top:50%;transform:translateY(-50%);svg{fill:#888;}}}@media (min-width:600px){.table__contribute{width:140px;}}"], rotate);
 var Participation = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].td.withConfig({
   displayName: "styles__Participation",
   componentId: "sc-1ugrlq0-1"
@@ -21814,22 +21849,32 @@ var Message = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.with
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/head */ "./node_modules/next/dist/next-server/lib/head.js");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var _styles_global__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/global */ "./src/styles/global.js");
-/* harmony import */ var _components_contribute__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/contribute */ "./src/components/contribute/index.js");
-/* harmony import */ var _components_search_company__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/search-company */ "./src/components/search-company/index.js");
-/* harmony import */ var _components_table_participation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/table-participation */ "./src/components/table-participation/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-float */ "./node_modules/@babel/runtime-corejs2/core-js/parse-float.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/head */ "./node_modules/next/dist/next-server/lib/head.js");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var _styles_global__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/global */ "./src/styles/global.js");
+/* harmony import */ var _components_contribute__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/contribute */ "./src/components/contribute/index.js");
+/* harmony import */ var _components_search_company__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/search-company */ "./src/components/search-company/index.js");
+/* harmony import */ var _components_table_participation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/table-participation */ "./src/components/table-participation/index.js");
+/* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/button */ "./src/components/button/index.js");
+
+
+
 
 
 var _jsxFileName = "/Users/g.souza/Personare/projects/stock/src/pages/index.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
+
 
 
 
@@ -21839,41 +21884,52 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 var Home = function Home() {
-  var refInputSymbol = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])(0);
+  var refInputSymbol = Object(react__WEBPACK_IMPORTED_MODULE_5__["useRef"])(0);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('R$ 0'),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])('R$ 0'),
       value = _useState[0],
       setValue = _useState[1];
 
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])([]),
       companyValue = _useState2[0],
       setCompanyValue = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(0),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(0),
       contributeTotal = _useState3[0],
       setContributeTotal = _useState3[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(true),
       load = _useState4[0],
       setLoad = _useState4[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])({
+    load: false,
+    symbol: ''
+  }),
+      loadUpdate = _useState5[0],
+      setLoadUpdate = _useState5[1];
+
+  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(false),
+      openOptionsRemove = _useState6[0],
+      setOptionsRemove = _useState6[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(function () {
     var storageCompanies = localStorage.getItem('companies');
     var storageValue = localStorage.getItem('value');
     storageCompanies && setCompanyValue(JSON.parse(storageCompanies));
     storageValue && setValue("R$ ".concat(storageValue));
     setLoad(false);
   }, []);
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    localStorage.setItem('companies', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(companyValue));
+  Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(function () {
+    localStorage.setItem('companies', _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_4___default()(companyValue));
     refInputSymbol.current.focus();
-  }, [companyValue]);
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+  }, [companyValue, loadUpdate]);
+  Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(function () {
     localStorage.setItem('value', value.replace(/R\$/, ''));
   }, [value]);
 
   var handleCompany = function handleCompany(company) {
-    setCompanyValue([].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(companyValue), [company]));
+    setCompanyValue([].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_3__["default"])(companyValue), [company]));
   };
 
   var handleValue = function handleValue(contribute) {
@@ -21890,43 +21946,97 @@ var Home = function Home() {
     }));
   };
 
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
+  var handleUpdateCompany =
+  /*#__PURE__*/
+  function () {
+    var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(symbol) {
+      var response, data, convertPrice, i;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoadUpdate({
+                load: true,
+                symbol: symbol
+              });
+              _context.next = 3;
+              return fetch("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=".concat(symbol, ".sa&apikey=B0RKSSJH2TS1VNXF"));
+
+            case 3:
+              response = _context.sent;
+              _context.next = 6;
+              return response.json();
+
+            case 6:
+              data = _context.sent;
+              convertPrice = (Math.round(data['Global Quote']['05. price'] * 100) / 100).toFixed(2);
+
+              for (i in companyValue) {
+                if (companyValue[i].symbol == symbol) {
+                  companyValue[i].price = _babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_1___default()(convertPrice);
+                }
+              }
+
+              setCompanyValue(companyValue);
+              setLoadUpdate({
+                load: false,
+                symbol: symbol
+              });
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleUpdateCompany(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_6___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 77
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 78
     },
     __self: this
-  }, "Stock | Github")), __jsx(_components_contribute__WEBPACK_IMPORTED_MODULE_6__["Contribute"], {
+  }, "Stock | Github")), __jsx(_components_contribute__WEBPACK_IMPORTED_MODULE_9__["Contribute"], {
     handleValue: handleValue,
     contribute: value,
     contributeTotal: contributeTotal,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 80
     },
     __self: this
-  }), __jsx(_components_search_company__WEBPACK_IMPORTED_MODULE_7__["SearchCompany"], {
+  }), __jsx(_components_search_company__WEBPACK_IMPORTED_MODULE_10__["SearchCompany"], {
     refProp: refInputSymbol,
     handleCompany: handleCompany,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 81
     },
     __self: this
-  }), __jsx(_components_table_participation__WEBPACK_IMPORTED_MODULE_8__["TableParticipation"], {
+  }), __jsx(_components_table_participation__WEBPACK_IMPORTED_MODULE_11__["TableParticipation"], {
     companies: companyValue,
     contribute: value.replace(/R\$/, ''),
     handleContributeTotal: handleContributeTotal,
     handleRemoveCompany: handleRemoveCompany,
+    handleUpdateCompany: handleUpdateCompany,
+    loadUpdate: loadUpdate,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 82
     },
     __self: this
   }), __jsx("a", {
@@ -21934,34 +22044,78 @@ var Home = function Home() {
     href: "https://github.com/guilhermessantos/stock",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 90
     },
     __self: this
-  }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaGithub"], {
+  }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_7__["FaGithub"], {
     size: "18",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 91
     },
     __self: this
-  })), __jsx(_styles_global__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), !!companyValue.length && __jsx("div", {
+    className: "footer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 94
+    },
+    __self: this
+  }, __jsx("div", {
+    className: openOptionsRemove && 'show-options-remove',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 95
+    },
+    __self: this
+  }, __jsx("span", {
+    onClick: function onClick() {
+      setCompanyValue([]);
+      setOptionsRemove(false);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 96
+    },
+    __self: this
+  }, "Sim"), __jsx("span", {
+    onClick: function onClick() {
+      return setOptionsRemove(false);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 100
+    },
+    __self: this
+  }, "N\xE3o")), __jsx(_components_button__WEBPACK_IMPORTED_MODULE_12__["Button"], {
+    size: "small",
+    secondary: true,
+    onClick: function onClick() {
+      return setOptionsRemove(!openOptionsRemove);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 103
+    },
+    __self: this
+  }, "Remover todos ativos")), __jsx(_styles_global__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 106
     },
     __self: this
   }), load && __jsx("div", {
     className: "load",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 107
     },
     __self: this
-  }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaSyncAlt"], {
+  }, __jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_7__["FaSyncAlt"], {
     size: "30",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 107
     },
     __self: this
   })));
@@ -21984,18 +22138,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 
 
-function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');\n\n  * {\n    box-sizing: border-box;\n    margin: 0;\n    outline: 0;\n    padding: 0;\n  }\n\n  html,\n  body,\n  #root {\n    height: 100%;\n  }\n\n  body {\n    padding-top: 15px;\n\n    @media (min-width: 480px) {\n      padding-bottom: 40px;\n      padding-top: 40px;\n    }\n  }\n\n  body,\n  input,\n  button {\n    appearance: none;\n    font-family: 'Source Sans Pro', sans-serif;\n  }\n\n  #__next {\n    max-width: 660px;\n    padding-left: 15px;\n    padding-right: 15px;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  .link_github {\n    top: 0;\n    position: absolute;\n    right: 0;\n    text-decoration: none;\n\n    &::before {\n      border-color: #DDD #DDD transparent transparent;\n      border-style: solid;\n      border-width: 28px;\n      content: \"\";\n      position: absolute;\n      top: 0;\n      right: 0;\n    }\n\n    svg {\n      fill: #00214d;\n      position: relative;\n      top: 10px;\n      right: 6px;\n    }\n  }\n\n  .load {\n    align-items: center;\n    display: flex;\n    background: #fff;\n    bottom: 0;\n    justify-content: center;\n    left: 0;\n    position: fixed;\n    right: 0;\n    top: 0;\n\n    svg {\n      fill: #00ebc7;\n      animation: ", " .4s linear infinite;\n    }\n  }\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  from {\n    transform: rotate(0)\n  }\n\n  to {\n    transform: rotate(360deg)\n  }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');\n\n  * {\n    box-sizing: border-box;\n    margin: 0;\n    outline: 0;\n    padding: 0;\n  }\n\n  html,\n  body,\n  #root {\n    height: 100%;\n  }\n\n  body {\n    padding-top: 15px;\n\n    @media (min-width: 480px) {\n      padding-bottom: 40px;\n      padding-top: 40px;\n    }\n  }\n\n  body,\n  input,\n  button {\n    appearance: none;\n    font-family: 'Source Sans Pro', sans-serif;\n  }\n\n  #__next {\n    max-width: 660px;\n    padding-left: 15px;\n    padding-right: 15px;\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n  .link_github {\n    top: 0;\n    position: absolute;\n    right: 0;\n    text-decoration: none;\n\n    &::before {\n      border-color: #DDD #DDD transparent transparent;\n      border-style: solid;\n      border-width: 28px;\n      content: \"\";\n      position: absolute;\n      top: 0;\n      right: 0;\n    }\n\n    svg {\n      fill: #00214d;\n      position: relative;\n      top: 10px;\n      right: 6px;\n    }\n  }\n\n  .load {\n    align-items: center;\n    display: flex;\n    background: #fff;\n    bottom: 0;\n    justify-content: center;\n    left: 0;\n    position: fixed;\n    right: 0;\n    top: 0;\n\n    svg {\n      fill: #00ebc7;\n      animation: ", " .4s linear infinite;\n    }\n  }\n\n  .footer {\n    margin: 40px 0;\n    position: relative;\n    text-align: center;\n\n    div,\n    div::before,\n    div::after {\n      left: 50%;\n      position: absolute;\n      transform: translateX(-50%);\n    }\n\n    div,\n    span {\n      display: inline-flex;\n    }\n\n    div {\n      border: 2px solid #DDD;\n      bottom: 100%;\n      border-radius: 5px;\n      height: 28px;\n      transition: opacity .2s, transform .2s, visibility .2s;\n      opacity: 0;\n      visibility: hidden;\n\n      &.show-options-remove {\n        opacity: 1;\n        visibility: visible;\n        transform: translate(-50%, -8px);\n      }\n\n      &::before,\n      &::after {\n        content: '';\n        border-width: 7px;\n        border-style: solid;\n      }\n\n      &::before {\n        border-color: #DDD transparent transparent transparent;\n        top: 100%;\n      }\n\n      &::after {\n        border-color: #fff transparent transparent transparent;\n        top: calc(100% - 2px);\n      }\n    }\n\n    span {\n      color: #666;\n      align-items: center;\n      justify-content: center;\n      cursor: pointer;\n      font-size: 14px;\n      font-weight: bold;\n      transition: color .2s;\n      text-transform: uppercase;\n      width: 40px;\n\n      &:hover {\n        color: #00214d;\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -22005,8 +22149,8 @@ function _templateObject() {
 }
 
 
-var rotate = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["keyframes"])(_templateObject());
-/* harmony default export */ __webpack_exports__["default"] = (Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"])(_templateObject2(), rotate));
+var rotate = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["keyframes"])(["from{transform:rotate(0)}to{transform:rotate(360deg)}"]);
+/* harmony default export */ __webpack_exports__["default"] = (Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"])(_templateObject(), rotate));
 
 /***/ }),
 
