@@ -1,4 +1,14 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+`
 
 export const Table = styled.table`
   color: #666;
@@ -10,6 +20,7 @@ export const Table = styled.table`
     color: #00214d;
     border-top: 2px solid #DDD;
     border-bottom: 2px solid #DDD;
+    transition: opacity .2s;
     height: 60px;
   }
 
@@ -28,6 +39,16 @@ export const Table = styled.table`
 
   tbody td:last-child {
     text-align: right;
+  }
+
+  .load-item {
+    animation: ${rotate} .4s linear infinite;
+    margin-left: 20px;
+  }
+
+  .active-load {
+    opacity: .3;
+    pointer-events: none;
   }
 
   @media (max-width: 479px) {

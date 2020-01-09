@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { MediaQuery } from 'react-responsive-hoc'
-import { FaTrashAlt, FaDollarSign } from 'react-icons/fa'
+import { FaTrashAlt, FaDollarSign, FaRedo, FaSyncAlt } from 'react-icons/fa'
 import { Table, Participation, ButtonAction, Message } from './styles'
 
-const TableParticipation = ({ companies, contribute, handleContributeTotal, handleRemoveCompany }) => {
+const TableParticipation = ({ companies, contribute, handleContributeTotal, handleRemoveCompany, handleUpdateCompany, loadUpdate }) => {
   useEffect(() => {
     let total = 0;
     const listValue = document.querySelectorAll('.table__participation')
@@ -14,7 +14,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
     }
 
     handleContributeTotal(parseFloat(total).toFixed(2))
-  }, [contribute, companies])
+  }, [contribute, companies, loadUpdate])
 
   const handleParticipation = (value) => {
     let total = 0
@@ -62,14 +62,16 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
         </thead>
         <tbody>
           {companies.map((company, index) => (
-            <tr key={company.symbol + index}>
+            <tr key={company.symbol + index} className={(loadUpdate.load && loadUpdate.symbol == company.symbol) && 'active-load'}>
               <td>
                 {company.symbol}
                 <MediaQuery query="(max-width: 479px)">
                   <button className="button__remove" onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
                 </MediaQuery>
               </td>
-              <td>R$ {replaceDot(company.price)}</td>
+              <td>
+                {loadUpdate.load && loadUpdate.symbol == company.symbol ? <FaSyncAlt className='load-item' size="15" /> : `R$ ${replaceDot(company.price)}`}
+              </td>
               <Participation>
               <span>{company.participation}%</span><span>{handleParticipation(company.participation)}%</span>
               </Participation>
@@ -80,7 +82,7 @@ const TableParticipation = ({ companies, contribute, handleContributeTotal, hand
                     <ButtonAction>
                       <div>
                         <button onClick={() => handleRemoveCompany(company.symbol)}><FaTrashAlt /></button>
-                        {/* <span><FaRedo /></span> */}
+                        <button onClick={() => handleUpdateCompany(company.symbol)}><FaRedo /></button>
                       </div>
                     </ButtonAction>
                 </td>
